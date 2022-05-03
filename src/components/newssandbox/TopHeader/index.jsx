@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Layout,Menu, Dropdown,Avatar } from 'antd';
-import {SmileOutlined,UserOutlined } from '@ant-design/icons';
+import {UserOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
@@ -8,37 +9,21 @@ import {
 
 const { Header } = Layout;  
 export default function TopHeader() {
+  const navigate = useNavigate()
   const [collapsed, setcollapsed] = useState(false)
   const changeCollapsed = () => {
     setcollapsed(!collapsed)
   }
+  const onClick = ({ key }) => {
+    if(key==='tmp-0'){
+      localStorage.removeItem('token')
+      navigate('/login')
+    }
+  };
   const menu = (
     <Menu
+    onClick={onClick}
       items={[
-        {
-          label: (
-            <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-              1st menu item
-            </a>
-          ),
-        },
-        {
-          label: (
-            <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
-              2nd menu item (disabled)
-            </a>
-          ),
-          icon: <SmileOutlined />,
-          disabled: true,
-        },
-        {
-          label: (
-            <a target="_blank" rel="noopener noreferrer" href="https://www.luohanacademy.com">
-              3rd menu item (disabled)
-            </a>
-          ),
-          disabled: true,
-        },
         {
           danger: true,
           label: '退出登录',
