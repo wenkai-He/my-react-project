@@ -26,7 +26,7 @@ export default function TopHeader() {
     onClick={onClick}
       items={[
         {
-          label: (<span>欢迎{roleName}回来</span>),
+          label: (<span>欢迎<span style={{color:"#1890ff"}}>{roleName}</span>回来</span>),
           key: 'mail',
         },
         {
@@ -42,7 +42,7 @@ export default function TopHeader() {
         collapsed ? <MenuUnfoldOutlined onClick={changeCollapsed} /> : <MenuFoldOutlined onClick={changeCollapsed} />
       }
       <div style={{ float: 'right' }}>
-        <span>{username}</span>
+        <span><span style={{color:"#1890ff"}}>{username}</span></span>
         <Dropdown overlay={menu}>
         <Avatar size="large" icon={<UserOutlined />} />
         </Dropdown>

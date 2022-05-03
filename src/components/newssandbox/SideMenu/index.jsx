@@ -10,14 +10,20 @@ import axios from 'axios';
 const { Sider } = Layout;
 
 export default function SideMenu() {
+  
   useEffect(() => {
+    const {role:{rights}}=JSON.parse(localStorage.getItem('token'))
+    
     axios.get('http://localhost:5000/rights?_embed=children').then(res => {
-      res.data.filter(item=>item.pagepermisson!==1)
+      res.data=res.data.filter(item=>item.pagepermisson===1)
+      res.data=res.data.filter(item=>rights.includes(item.key))
+
       res.data.forEach(item => {
         if (item.children.length === 0) {
           item.children = ''
         } else {
           item.children=item.children.filter(item=>item.pagepermisson===1)
+          item.children=item.children.filter(item=>rights.includes(item.key))
           item.children.forEach(element => {
             element.label = element.title;
             element.icon = <UserOutlined />
@@ -29,7 +35,6 @@ export default function SideMenu() {
         item.label = item.title;
         delete item.title
       })
-      console.log(res.data);
       setitemList(res.data)
       
     })

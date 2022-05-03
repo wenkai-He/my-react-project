@@ -1,12 +1,42 @@
-import React, { forwardRef, useState,useEffect } from 'react'
+import React, { forwardRef, useState, useEffect } from 'react'
 import { Select, Form, Input } from 'antd'
 const UserForm = forwardRef((props, ref) => {
     const { Option } = Select;
-    const [Disabled, setDisabled] = useState(false)
+    const [Disabled, setDisabled] = useState(false);
+    const { roleId, region } = JSON.parse(localStorage.getItem('token'))
     useEffect(() => {
-      setDisabled(props.updateDisabled)
+        setDisabled(props.updateDisabled)
     }, [props.updateDisabled])
-    
+    const checkRegionDisabled = (item) => {
+        if (props.isUpdate) {
+            if (roleId === 1) {
+                return false;
+            } else {
+                return true
+            }
+        } else {
+            if (roleId === 1) {
+                return false;
+            } else {
+                return item.value !== region
+            }
+        }
+    }
+    const checkRoleDisabled = (item) => {
+        if (props.isUpdate) {
+            if (roleId === 1) {
+                return false;
+            } else {
+                return true
+            }
+        } else {
+            if (roleId === 1) {
+                return false;
+            } else {
+                return item.id !== 3
+            }
+        }
+    }
     return (
         <Form
             ref={ref}
@@ -36,7 +66,11 @@ const UserForm = forwardRef((props, ref) => {
                 <Select disabled={Disabled}>
                     {
                         props.regionList.map(item =>
-                            <Option value={item.value} key={item.id}>{item.title}</Option>
+                            <Option
+                                value={item.value}
+                                key={item.id}
+                                disabled={checkRegionDisabled(item)}
+                            >{item.title}</Option>
                         )
                     }
                 </Select>
@@ -59,7 +93,7 @@ const UserForm = forwardRef((props, ref) => {
                 }}>
                     {
                         props.roleList.map(item =>
-                            <Option value={item.id} key={item.id}>{item.roleName}</Option>
+                            <Option value={item.id} key={item.id} disabled={checkRoleDisabled(item)}>{item.roleName}</Option>
                         )
                     }
                 </Select>

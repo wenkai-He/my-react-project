@@ -68,9 +68,13 @@ export default function UserList() {
 
   //请求用户信息
   useEffect(() => {
+    const {roleId,region,username}=JSON.parse(localStorage.getItem('token'))
     axios.get('http://localhost:5000/users?_expand=role').then(res => {
       const list = res.data;
-      setdataSource(list)
+      setdataSource(roleId===1?list:[
+        ...list.filter(item=>item.username===username),
+        ...list.filter(item=>item.region===region&&item.roleId===3),
+      ])
     })
   }, [])
   //请求区域列表
@@ -220,7 +224,7 @@ export default function UserList() {
         }
         }
       >
-        <UserForm regionList={regionList} roleList={roleList} ref={updateForm} updateDisabled={updateDisabled}></UserForm>
+        <UserForm regionList={regionList} roleList={roleList} ref={updateForm} updateDisabled={updateDisabled} isUpdate={true}></UserForm>
       </Modal>
     </div>
   )
