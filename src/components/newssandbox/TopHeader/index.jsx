@@ -9,13 +9,14 @@ import {
 
 const { Header } = Layout;  
 export default function TopHeader() {
+  const {role:{roleName},username}=JSON.parse(localStorage.getItem('token'))
   const navigate = useNavigate()
   const [collapsed, setcollapsed] = useState(false)
   const changeCollapsed = () => {
     setcollapsed(!collapsed)
   }
   const onClick = ({ key }) => {
-    if(key==='tmp-0'){
+    if(key==='tmp-1'){
       localStorage.removeItem('token')
       navigate('/login')
     }
@@ -24,6 +25,10 @@ export default function TopHeader() {
     <Menu
     onClick={onClick}
       items={[
+        {
+          label: (<span>欢迎{roleName}回来</span>),
+          key: 'mail',
+        },
         {
           danger: true,
           label: '退出登录',
@@ -37,7 +42,7 @@ export default function TopHeader() {
         collapsed ? <MenuUnfoldOutlined onClick={changeCollapsed} /> : <MenuFoldOutlined onClick={changeCollapsed} />
       }
       <div style={{ float: 'right' }}>
-        <span>owen</span>
+        <span>{username}</span>
         <Dropdown overlay={menu}>
         <Avatar size="large" icon={<UserOutlined />} />
         </Dropdown>
