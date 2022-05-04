@@ -39,7 +39,7 @@ export default function UserList() {
   const deleteMethod = (item) => {
     setdataSource(dataSource.filter(data => data.id !== item.id))
 
-    axios.delete(`http://localhost:5000/users/${item.id}`)
+    axios.delete(`/users/${item.id}`)
 
   }
 
@@ -48,7 +48,7 @@ export default function UserList() {
     item.roleState = !item.roleState
     setdataSource([...dataSource])
 
-    axios.patch(`http://localhost:5000/users/${item.id}`, {
+    axios.patch(`/users/${item.id}`, {
       roleState: item.roleState
     })
   }
@@ -69,7 +69,7 @@ export default function UserList() {
   //请求用户信息
   useEffect(() => {
     const {roleId,region,username}=JSON.parse(localStorage.getItem('token'))
-    axios.get('http://localhost:5000/users?_expand=role').then(res => {
+    axios.get('/users?_expand=role').then(res => {
       const list = res.data;
       setdataSource(roleId===1?list:[
         ...list.filter(item=>item.username===username),
@@ -79,13 +79,13 @@ export default function UserList() {
   }, [])
   //请求区域列表
   useEffect(() => {
-    axios.get('http://localhost:5000/regions').then(res => {
+    axios.get('/regions').then(res => {
       setregionList(res.data)
     })
   }, [])
   //请求职位列表
   useEffect(() => {
-    axios.get('http://localhost:5000/roles').then(res => {
+    axios.get('/roles').then(res => {
       setroleList(res.data)
     })
   }, [])
@@ -178,7 +178,7 @@ export default function UserList() {
           addForm.current.validateFields().then(value => {
             setVisible(false);
             addForm.current.resetFields()
-            axios.post('http://localhost:5000/users', {
+            axios.post('/users', {
               ...value,
               "roleState": true,
               "default": false,
@@ -219,7 +219,7 @@ export default function UserList() {
               return item
             }))
             setupdateDisabled(!updateDisabled)
-            axios.patch(`http://localhost:5000/users/${current.id}`, value)
+            axios.patch(`/users/${current.id}`, value)
           })
         }
         }

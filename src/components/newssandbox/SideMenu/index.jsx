@@ -14,7 +14,7 @@ export default function SideMenu() {
   useEffect(() => {
     const {role:{rights}}=JSON.parse(localStorage.getItem('token'))
     
-    axios.get('http://localhost:5000/rights?_embed=children').then(res => {
+    axios.get('/rights?_embed=children').then(res => {
       res.data=res.data.filter(item=>item.pagepermisson===1)
       res.data=res.data.filter(item=>rights.includes(item.key))
 

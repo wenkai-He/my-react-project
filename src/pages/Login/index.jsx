@@ -7,7 +7,7 @@ import axios from 'axios';
 export default function Login() {
   const navigate = useNavigate()
   const onFinish = (values) => {
-    axios.get(`http://localhost:5000/users?username=${values.username}&password=${values.password}&roleState=true&_expand=role`).then(res=>{
+    axios.get(`/users?username=${values.username}&password=${values.password}&roleState=true&_expand=role`).then(res=>{
       if(res.data.length===0){
         message.error('用户名或密码不匹配')
       }else{
