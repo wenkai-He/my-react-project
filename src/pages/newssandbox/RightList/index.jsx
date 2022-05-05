@@ -4,20 +4,7 @@ import axios from 'axios'
 import { ExclamationCircleOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
 export default function RightList() {
   const { confirm } = Modal;
-  const [dataSource, setdataSource] = useState([
-    {
-      key: '1',
-      name: '胡彦斌',
-      age: 32,
-      address: '西湖区湖底公园1号',
-    },
-    {
-      key: '2',
-      name: '胡彦祖',
-      age: 42,
-      address: '西湖区湖底公园1号',
-    },
-  ])
+  const [dataSource, setdataSource] = useState([])
   //删除回调
   function showConfirm(item) {
     confirm({
