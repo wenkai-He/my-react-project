@@ -7,9 +7,10 @@ import {
 import './index.css'
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import { connect } from 'react-redux';
 const { Sider } = Layout;
 
-export default function SideMenu() {
+ function SideMenu(props) {
   
   useEffect(() => {
     const {role:{rights}}=JSON.parse(localStorage.getItem('token'))
@@ -64,7 +65,7 @@ export default function SideMenu() {
   const openKey = ['/' + location.pathname.split('/')[1]]
 
   return (
-    <Sider trigger={null} collapsible collapsed={false}>
+    <Sider trigger={null} collapsible collapsed={props.isCollapsed}>
       <div style={{ display: "flex", height: "100%", "flexDirection": "column" }}>
         <div className="logo">新闻发布管理系统</div>
         <div style={{ flex: 1, "overflow": 'auto' }}>
@@ -76,3 +77,12 @@ export default function SideMenu() {
     </Sider>
   )
 }
+
+
+const mapStateProps=({CollapsedReducer:{isCollapsed}})=>{
+  return {
+    isCollapsed
+  }
+}
+
+export default connect(mapStateProps)(SideMenu)
