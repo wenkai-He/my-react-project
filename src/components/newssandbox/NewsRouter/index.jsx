@@ -16,6 +16,7 @@ import Published from '@/pages/publishmanage/Published'
 import Sunset from '@/pages/publishmanage/Sunset'
 import Preview from '@/pages/newsmanage/preview'
 import Update from '@/pages/newsmanage/update'
+
 import axios from 'axios'
 import { connect } from 'react-redux'
 const localRouterMap = {

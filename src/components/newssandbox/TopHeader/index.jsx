@@ -47,7 +47,7 @@ function TopHeader(props) {
       <div style={{ float: 'right' }}>
         <span><span style={{color:"#1890ff"}}>{username}</span></span>
         <Dropdown overlay={menu}>
-        <Avatar size="large" icon={<UserOutlined />} />
+        <Avatar size="large" icon={<UserOutlined />} src="https://joeschmoe.io/api/v1/random"/>
         </Dropdown>
       </div>
     </Header>
