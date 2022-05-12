@@ -9,6 +9,7 @@ export default function Detail() {
   const [newsInfo, setnewsInfo] = useState(null)
   const location = useLocation()
   const id = location.pathname.slice(8)
+  
   useEffect(() => {
     axios.get(`/news/${id}?_expand=category&_expand=role`).then(res => {
       setnewsInfo({

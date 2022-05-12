@@ -41,6 +41,7 @@ export default function Login() {
               prefix={<LockOutlined className="site-form-item-icon" />}
               type="password"
               placeholder="Password"
+              autoComplete='true'
             />
           </Form.Item>
           <Form.Item>
